@@ -19,13 +19,18 @@ class DetailProductPage extends StatefulWidget {
 class _DetailProductPageState extends State<DetailProductPage> {
   int currentIndex = 0;
   final CarouselController carouselController = CarouselController();
+  var spaceH = const SizedBox(
+    width: 8.0,
+  );
+  var spaceV = const SizedBox(
+    height: 8.0,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detail"),
-        actions: const [],
+        title: const Text("Detail Produk"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -106,13 +111,60 @@ class _DetailProductPageState extends State<DetailProductPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("\$${widget.product.price!.toString()}"),
-                  Text(widget.product.title!),
+                  Row(
+                    children: [
+                      Text(
+                        "\$${widget.product.price!.toString()}",
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                      spaceH,
+                      Text("stock: ${widget.product.stock!.toString()}"),
+                    ],
+                  ),
+                  spaceV,
+                  Text(
+                    widget.product.title!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
                   Text(widget.product.description!),
-                  Text(widget.product.stock!.toString()),
-                  Text(widget.product.brand!),
-                  Text(widget.product.category!),
-                  Text(widget.product.rating!.toString()),
+                  spaceV,
+                  Row(
+                    children: [
+                      Chip(
+                        label: Text(
+                          widget.product.brand!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        backgroundColor: Colors.green,
+                      ),
+                      spaceH,
+                      Chip(
+                        label: Text(
+                          widget.product.rating!.toString(),
+                        ),
+                        backgroundColor: Colors.amber,
+                      ),
+                      spaceH,
+                      Chip(
+                        label: Text(
+                          widget.product.category!,
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        backgroundColor: Colors.purple,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
